@@ -243,6 +243,9 @@ class BaseReadline(object):
     def readline(self, prompt=''):
         raise NotImplementedError
 
+    def redisplay(self):
+        raise NotImplementedError
+
 #
 # Callback interface
 #
@@ -572,6 +575,9 @@ class Readline(BaseReadline):
         self.console.write('\r\n')
         log('returning(%s)' % self.get_line_buffer())
         return self.get_line_buffer() + '\n'
+
+    def redisplay(self):
+        self._update_line()
 
     def handle_ctrl_c(self):
         from pyreadline.keysyms.common import KeyPress
